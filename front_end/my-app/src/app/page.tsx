@@ -16,7 +16,7 @@ import { RightChatDrawer } from '@/components';
 export default function LandingPage() {
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="md" sx={{ py: 6 }}>
 
       <Box
         sx={{
@@ -43,20 +43,6 @@ export default function LandingPage() {
         >
           Bridging the educational gap with AI
         </Typography>
-        <Stack
-          direction={{ xs: 'column', sm: 'row' }}
-          spacing={3}
-          justifyContent="center"
-          sx={{ mt: 2 }}
-        >
-          <Button variant="contained" color="primary" size="large" 
-            onClick={() => {console.log(localStorage.getItem("themeMode"))}}>
-            Get Started
-          </Button>
-          <Button variant="outlined" color="primary" size="large" href="#details">
-            Discover More
-          </Button>
-        </Stack>
       </Box>
 
       <Divider sx={{ mb: 6 }} />
@@ -70,20 +56,20 @@ export default function LandingPage() {
           gap: 4,
         }}
       >
-        <InfoCard title="Purpose" color="primary.dark">
-          Our goal is to revolutionize how students prepare for exams by making practice tests and flashcards creation effortless and tailored. Save time, stay focused, and learn smarter.
+        <InfoCard title="Purpose" color="primary.main">
+          LearnBridge empowers anyone—regardless of income—to access quality education. By using AI to generate complete, structured courses, we provide an affordable way for learners to broaden their knowledge and grow independently.
         </InfoCard>
 
-        <InfoCard title="Inspiration" color="primary.dark">
-          Frustrated with manual and time-consuming study tools, we dreamed up Study Buddy — a tool that automates practice test creation, making exam prep smoother and more effective.
+        <InfoCard title="Inspiration" color="primary.main">
+          Traditional learning platforms can be expensive or time-consuming to build from scratch. We created LearnBridge to automate the creation of well-structured courses, making self-education more accessible to everyone.
         </InfoCard>
 
-        <InfoCard title="What It Does" color="primary.dark">
-          Upload notes, paste links, or provide a topic prompt. Study Buddy uses AI-powered retrieval and content analysis to generate high-quality multiple-choice tests and flashcards—complete with references.
+        <InfoCard title="What It Does" color="primary.main">
+          Just enter a course title and a team of AI agents work together to generate a full course with multiple modules and lessons. Lessons come in diverse formats, including in-depth readings, tests, and YouTube video guides. A built-in assistant can also answer questions using the course content.
         </InfoCard>
 
-        <InfoCard title="What’s Next" color="primary.dark">
-          We're building features like interactive note-taking, spaced repetition learning modes, and a personalized dashboard for tracking your progress and history — making Study Buddy your ultimate study partner.
+        <InfoCard title="What's Next" color="primary.main">
+          We're building features like exporting courses, personalized progress tracking, and better assistant reasoning across lesson types. LearnBridge will soon support collaborative learning and become a full-featured, AI-powered education platform for everyone.
         </InfoCard>
       </Box>
     </Container>
@@ -96,6 +82,7 @@ function InfoCard({ title, children, color }) {
       elevation={6}
       sx={{
         borderRadius: 3,
+        bgcolor: 'background.light',
         boxShadow: '0 12px 24px rgba(0, 0, 0, 0.2)',
         borderTop: `4px solid ${color}`,
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',

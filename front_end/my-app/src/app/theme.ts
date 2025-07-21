@@ -8,117 +8,121 @@ const typography = {
 
 const paletteLight = {
   mode: 'light' as const,
-  divider: '#d4d4d4',
+  divider: 'hsl(0, 0%, 80%)',
   background: {
-    default: '#ebebeb',
-    paper:    '#f0f0f0', 
+    default: 'hsl(0, 0%, 94%)',
+    paper: 'hsl(0, 0%, 96%)',
+    light: 'hsl(0, 0%, 98%)'
   },
   text: {
-    secondary: '#2e2e2e', // was #333333
-    primary:   '#1f1f1f', // was #474747
+    secondary: 'hsl(0, 0%, 20%)',
+    primary: 'hsl(0, 0%, 5%)',
   },
   primary: {
-    main: '#3aafa2',
-    light: '#50d2c2',
-    dark: '#248c82',
-    contrastText: '#fff',
-    100: '#86eadc', 
-    200: '#75d8cb', 
-    300: '#64c6ba', 
-    400: '#53b4a8', 
-    500: '#42a197', 
-    600: '#308f86', // dark
-    700: '#1f7d74', 
-    800: '#147169',
+    main: 'hsl(173, 50%, 46%)',
+    light: 'hsl(172, 56%, 60%)',
+    dark: 'hsl(173, 56%, 34%)',
+    contrastText: 'hsl(0, 0%, 100%)',
+    100: 'hsl(173, 60%, 75%)',
+    200: 'hsl(173, 50%, 66%)',
+    300: 'hsl(173, 45%, 58%)',
+    400: 'hsl(173, 40%, 51%)',
+    500: 'hsl(173, 38%, 45%)',
+    600: 'hsl(173, 49%, 37%)',
+    700: 'hsl(173, 59%, 30%)',
+    800: 'hsl(174, 66%, 25%)',
   },
   secondary: {
-    main: '#3B82F6',
-    light: '#60A5FA',
-    dark: '#2563EB',
-    contrastText: '#ffffff',
+    main: 'hsl(217, 91%, 60%)',
+    light: 'hsl(217, 94%, 67%)',
+    dark: 'hsl(223, 83%, 53%)',
+    contrastText: 'hsl(0, 0%, 100%)',
   },
   error: {
-    light: '#fdecea',
-    main:  '#ff3729',
-    dark:  '#ba000d',
-    contrastText: '#fff',
+    light: 'hsl(6, 85%, 95%)',
+    main: 'hsl(4, 100%, 57%)',
+    dark: 'hsl(0, 100%, 36%)',
+    contrastText: 'hsl(0, 0%, 100%)',
   },
   success: {
-    light: '#e6f4ea',
-    main:  '#118d15ff',
-    dark:  '#087f23',
-    contrastText: '#fff',
+    light: 'hsl(132, 35%, 93%)',
+    main: 'hsl(122, 77%, 31%)',
+    dark: 'hsl(131, 82%, 26%)',
+    contrastText: 'hsl(0, 0%, 100%)',
   },
   grey: {
-    50:  '#f2f2f2', // was #fafafa
-    100: '#e8e8e8', // was #f4f4f4
-    200: '#dcdcdc', // was #e5e5e5
-    300: '#c8c8c8', // was #d4d4d4
-    400: '#a1a1a1', // was #a3a3a3
-    500: '#707070', // was #737373
-    600: '#505050', // was #525252
-    700: '#393939', // was #3a3a3a
-    800: '#2a2a2a', // was #2c2c2c
-    900: '#1c1c1c', // was #1e1e1e
+    50: 'hsl(0, 0%, 95%)',
+    100: 'hsl(0, 0%, 91%)',
+    200: 'hsl(0, 0%, 86%)',
+    300: 'hsl(0, 0%, 78%)',
+    400: 'hsl(0, 0%, 63%)',
+    500: 'hsl(0, 0%, 44%)',
+    600: 'hsl(0, 0%, 31%)',
+    700: 'hsl(0, 0%, 22%)',
+    800: 'hsl(0, 0%, 16%)',
+    900: 'hsl(0, 0%, 11%)',
   },
-}
+};
+
 
 const paletteDark = {
   mode: 'dark' as const,
-  divider: '#2e2e2e',
+  divider: 'hsl(0, 0%, 20%)',
   background: {
-    default: '#212121',
-    paper:   '#1a1a1a',
+    default: 'hsl(0, 0%, 4%)',
+    paper: 'hsl(0, 0%, 0%)',
+    light: 'hsl(0, 0%, 7%)'
   },
   text: {
-    primary:   '#ebebeb',
-    secondary: '#e0e0e0',
+    primary: 'hsl(0, 0%, 95%)',
+    secondary: 'hsl(0, 0%, 80%)',
   },
   primary: {
-    main: '#3aafa2',
-    light: '#50d2c2',
-    dark: '#248c82',
-    contrastText: '#fff',
-    100: '#86eadc', 
-    200: '#75d8cb', 
-    300: '#64c6ba', 
-    400: '#53b4a8', 
-    500: '#42a197', 
-    600: '#308f86', // dark
-    700: '#1f7d74', 
-    800: '#147169',
+    main: 'hsl(173, 50%, 46%)',
+    light: 'hsl(172, 56%, 60%)',
+    dark: 'hsl(173, 56%, 34%)',
+    contrastText: 'hsl(0, 0%, 100%)',
+    100: 'hsl(173, 60%, 75%)',
+    200: 'hsl(173, 50%, 66%)',
+    300: 'hsl(173, 45%, 58%)',
+    400: 'hsl(173, 40%, 51%)',
+    500: 'hsl(173, 38%, 45%)',
+    600: 'hsl(173, 49%, 37%)',
+    700: 'hsl(173, 59%, 30%)',
+    800: 'hsl(174, 66%, 25%)',
   },
   secondary: {
-    main: '#3B82F6',
-    light: '#60A5FA',
-    dark: '#2563EB',
-    contrastText: '#ffffff',
+    main: 'hsl(217, 91%, 60%)',
+    light: 'hsl(217, 94%, 67%)',
+    dark: 'hsl(223, 83%, 53%)',
+    contrastText: 'hsl(0, 0%, 100%)',
   },
   error: {
-    light: '#fdecea',
-    main:  '#ff3729',
-    dark:  '#ba000d',
-    contrastText: '#fff',
+    light: 'hsl(6, 85%, 95%)',
+    main: 'hsl(4, 100%, 57%)',
+    dark: 'hsl(0, 100%, 36%)',
+    contrastText: 'hsl(0, 0%, 100%)',
   },
   success: {
-    light: '#e6f4ea',
-    main:  '#118d15ff',
-    dark:  '#087f23',
-    contrastText: '#fff',
+    light: 'hsl(132, 35%, 93%)',
+    main: 'hsl(122, 77%, 31%)',
+    dark: 'hsl(131, 82%, 26%)',
+    contrastText: 'hsl(0, 0%, 100%)',
   },
   grey: {
-    50:  '#1e1e1e',
-    100: '#2c2c2c',
-    200: '#3a3a3a',
-    300: '#525252',
-    400: '#737373',
-    500: '#a3a3a3',
-    600: '#d4d4d4',
-    700: '#e5e5e5',
-    800: '#f4f4f4',
-    900: '#fafafa',
+    50: 'hsl(0, 0%, 12%)',
+    100: 'hsl(0, 0%, 17%)',
+    200: 'hsl(0, 0%, 23%)',
+    300: 'hsl(0, 0%, 32%)',
+    400: 'hsl(0, 0%, 45%)',
+    500: 'hsl(0, 0%, 64%)',
+    600: 'hsl(0, 0%, 83%)',
+    700: 'hsl(0, 0%, 90%)',
+    800: 'hsl(0, 0%, 96%)',
+    900: 'hsl(0, 0%, 98%)',
   },
 };
+
 
 export const lightTheme = createTheme({
   typography,
@@ -132,7 +136,7 @@ export const darkTheme = createTheme({
     MuiAppBar: {
       defaultProps: {
         enableColorOnDark: true,
-        color: 'primary',  // or 'inherit'
+        color: 'primary',
       },
       styleOverrides: {
         root: {
@@ -178,10 +182,10 @@ export const darkTheme = createTheme({
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          backgroundColor: paletteDark.background.paper, // background color
+          backgroundColor: paletteDark.background.paper,
         },
         arrow: {
-          color: paletteDark.background.paper, // arrow color (same as background)
+          color: paletteDark.background.paper,
         },
       },
     },

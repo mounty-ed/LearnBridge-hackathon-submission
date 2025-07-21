@@ -10,7 +10,7 @@ import {
 export default function CoursePage() {
     return (
         <Container maxWidth="md" sx={{ mt: 8 }}>
-            <Typography>Search for poo</Typography>
+            <Typography>Work in progress. Search for courses</Typography>
         </Container>
     )
 }

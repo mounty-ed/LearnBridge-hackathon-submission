@@ -113,7 +113,7 @@ export default function CourseCreatePage() {
               <Box component="form" noValidate autoComplete="off" sx={{ width: '100%' }}>
                 <Box
                   sx={{
-                    bgcolor: theme.palette.background.paper,
+                    bgcolor: 'background.light',
                     borderRadius: 999,
                     minWidth: 460,
                     boxShadow: resolvedMode === "light" ? (
@@ -220,7 +220,7 @@ export default function CourseCreatePage() {
         ) : (
           <Box sx={{ width: '100%' }}>
             <Container maxWidth="md">
-              <Paper sx={{ width: '100%', maxWidth: '750px', mx: 'auto', p: 5, bgcolor: 'background.paper', borderRadius: 6, mt: 5,
+              <Paper sx={{ width: '100%', maxWidth: '750px', mx: 'auto', p: 5, bgcolor: 'background.light', borderRadius: 6, mt: 5,
                 boxShadow: `0px 6px 24px ${alpha(theme.palette.grey[600], 0.3)}`, 
               }}>
 

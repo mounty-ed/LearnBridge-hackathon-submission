@@ -217,7 +217,7 @@ export default function TestViewer({ testJsonContent, title, setStarted, handleC
               padding: 4,
               borderRadius: 2,
               borderWidth: 0,
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: 'background.light',
               boxShadow: `0px 5px 24px ${alpha(theme.palette.grey[400], 0.3)}`,
             }}
           >

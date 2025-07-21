@@ -154,18 +154,20 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               },
             }}
           >
-            <Typography
-              variant="h6"
-              noWrap
-              sx={{
-                color: resolvedMode === "light" ? theme.palette.primary.dark : theme.palette.primary.light,
-                fontWeight: 500,
-                fontSize: '1.5rem',
-                textTransform: 'none',
-              }}
-            >
-              LearnBridge
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontWeight: 500,
+                  fontSize: '1.5rem',
+                  textTransform: 'none',
+                }}
+              >
+                LearnBridge
+              </Typography>
+            </Box>
           </Button>
         </Box>
 

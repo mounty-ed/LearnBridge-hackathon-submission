@@ -127,8 +127,8 @@ export default function Dashboard() {
       />
 
       <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row'}}>
-        <HomeIcon sx={{ fontSize: '5rem', mr: 2, color: 'text.secondary' }}/>
-        <Typography variant="h2" fontWeight={700} color="text.secondary">
+        <HomeIcon sx={{ fontSize: '5rem', mr: 2 }}/>
+        <Typography variant="h2" fontWeight={700}>
           Your Courses
         </Typography>
       </Box>
@@ -158,17 +158,18 @@ export default function Dashboard() {
                   <Paper
                     key={id}
                     sx={{
+                      bgcolor: 'background.light',
                       position: 'relative',
                       p: 2,
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 1.5,
-                      boxShadow: `0px 0px 16px ${alpha(theme.palette.grey[600], 0.3)}`,
+                      boxShadow: `0px 2px 8px ${alpha(theme.palette.grey[600], 0.3)}`,
                       borderRadius: 2,
                       transition: 'transform 0.2s ease, box-shadow 0.3s ease',
                       '&:hover': {
                         transform: 'translateY(-2px)',
-                        boxShadow: `0 8px 36px ${alpha(theme.palette.grey[900], 0.2)}`,
+                        boxShadow: `0 8px 18px ${alpha(theme.palette.grey[900], 0.2)}`,
                       },
                     }}
                     >
@@ -235,7 +236,6 @@ export default function Dashboard() {
         </Box>
 
         {(() => {
-          // 1️⃣ extract the “in progress” courses
           const inProgress = userCourses.filter(
             ({ totalLessons, generatedLessons, deleted, completedLessons }) =>
               totalLessons === generatedLessons &&
@@ -243,7 +243,6 @@ export default function Dashboard() {
               totalLessons !== completedLessons
           );
 
-          // 2️⃣ if none, show the placeholder
           if (inProgress.length === 0) {
             return (
               <Typography color="text.secondary">
@@ -252,7 +251,6 @@ export default function Dashboard() {
             );
           }
 
-          // 3️⃣ otherwise render the list
           return (
             <Stack spacing={2}>
               {inProgress.map(
@@ -260,12 +258,13 @@ export default function Dashboard() {
                   <Paper
                     key={id}
                     sx={{
+                      bgcolor: 'background.light',
                       position: 'relative',
                       p: 2,
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 1.5,
-                      boxShadow: `0px 0px 16px ${alpha(
+                      boxShadow: `0px 2px 8px ${alpha(
                         theme.palette.grey[600],
                         0.3
                       )}`,
@@ -273,7 +272,7 @@ export default function Dashboard() {
                       transition: 'transform 0.2s ease, box-shadow 0.3s ease',
                       '&:hover': {
                         transform: 'translateY(-2px)',
-                        boxShadow: `0 8px 36px ${alpha(
+                        boxShadow: `0 8px 18px ${alpha(
                           theme.palette.grey[900],
                           0.2
                         )}`,
@@ -393,12 +392,13 @@ export default function Dashboard() {
                 <Paper
                   key={id}
                   sx={{
+                    bgcolor: 'background.light',
                     position: 'relative',
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 1.5,
-                    boxShadow: `0px 0px 16px ${alpha(
+                    boxShadow: `0px 2px 8px ${alpha(
                       theme.palette.grey[600],
                       0.3
                     )}`,
@@ -406,7 +406,7 @@ export default function Dashboard() {
                     transition: 'transform 0.2s ease, box-shadow 0.3s ease',
                     '&:hover': {
                       transform: 'translateY(-2px)',
-                      boxShadow: `0 8px 36px ${alpha(
+                      boxShadow: `0 8px 18px ${alpha(
                         theme.palette.grey[900],
                         0.2
                       )}`,

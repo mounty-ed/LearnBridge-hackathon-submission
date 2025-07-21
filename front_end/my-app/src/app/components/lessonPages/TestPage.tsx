@@ -79,7 +79,7 @@ export default function TestPage({ content, handleComplete }: TestPageProps) {
           mt: 24,
           mx: 'auto',
         }}>
-          <Paper sx={{ width: '70%', minWidth: '640px', maxWidth: '750px', mx: 'auto', p: 5, bgcolor: 'background.paper', borderRadius: 6, my: 6,
+          <Paper sx={{ width: '70%', minWidth: '640px', maxWidth: '750px', mx: 'auto', p: 5, bgcolor: 'background.light', borderRadius: 6, my: 6,
             boxShadow: `0px 6px 24px ${alpha(theme.palette.grey[400], 0.3)}`, 
           }}>
 
