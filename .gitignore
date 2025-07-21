@@ -1,3 +1,8 @@
+document_uploads
+.venv
+__pycache__/
+firebase-service-account.json
+
 # Logs
 logs
 *.log
