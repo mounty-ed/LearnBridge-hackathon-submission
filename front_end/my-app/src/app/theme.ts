@@ -69,13 +69,13 @@ const paletteDark = {
   mode: 'dark' as const,
   divider: 'hsl(0, 0%, 20%)',
   background: {
-    default: 'hsl(0, 0%, 4%)',
+    default: 'hsl(0, 0%, 5%)',
     paper: 'hsl(0, 0%, 0%)',
-    light: 'hsl(0, 0%, 7%)'
+    light: 'hsl(0, 0%, 9%)'
   },
   text: {
-    primary: 'hsl(0, 0%, 95%)',
-    secondary: 'hsl(0, 0%, 80%)',
+    primary: 'hsl(0, 0%, 90%)',
+    secondary: 'hsl(0, 0%, 75%)',
   },
   primary: {
     main: 'hsl(173, 50%, 46%)',

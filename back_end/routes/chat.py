@@ -86,7 +86,6 @@ def chat():
         else:
             chain_msgs.append(AIMessage(content=m.get('text', '')))
 
-    print(chain_msgs)
     # 4) Stream LLM response
     llm = current_app.config['CHAT_MODEL']
     def generate():

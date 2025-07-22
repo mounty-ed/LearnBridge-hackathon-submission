@@ -14,7 +14,7 @@ generate_course_bp = Blueprint('course', __name__)
 
 class LessonOutline(BaseModel):
     title: str
-    type: Literal["reading", "test", "video", "unit test", "assignment"] = Field(..., description="The type of lesson (must be 'reading', 'test', 'unit test', 'video', or 'assignment')")
+    type: Literal["reading", "test", "video", "assignment"] = Field(..., description="The type of lesson (must be 'reading', 'test', 'video', or 'assignment')")
     description: str = Field(..., description="A short but thorough description of the lesson that matches with the type of the lesson. no more than 2 sentences.")
 
 class ModuleOutline(BaseModel):
@@ -49,7 +49,7 @@ def course():
     types       = data['types']
     print(types)
 
-    allowed = ["reading", "unit test", "test"]
+    allowed = ["reading"]
     if types.get("tests"):
         allowed.append("test")
     if types.get("videos"):
@@ -75,11 +75,12 @@ def course():
     outline_prompt = f"""
     Generate a cohesive and slow, progressive course outline on **{topic}** with {num_mod} modules.
     Each module should list {min_lessons}-{max_lessons} lesson titles.
-    Only create meaningful lesson titles that accurately describe the desirable content (do not add 'Unit Test:' at the beginning of a unit test, only return the test topic).
-    Ensure there is at least one unit test at the end of each module.
+    Only create meaningful lesson titles that accurately describe the desirable content (do not add a lesson type prefix at the start of the title ex: 'Test:', 'Assignment:'.)
+    Ensure there is at least one test or assignment at the end of each module.
     When generating a video lesson outline, don't choose a topic that is too niche.
     Only choose assignment type when relevant to the topic. Titles and descriptions should accurately describe the assignment.
-    You are not required to include all lesson types in one module, but lesson type variety is encouraged. Choose the lesson type based on the cohesiveness and flow of learning of the course (unit test is required).
+    You are not required to include all lesson types in one module, but lesson type variety is encouraged. Choose the lesson type based on the cohesiveness and flow of learning of the course (test or assignment is required).
+    Interchange tests and assignments according to the course topic. For example, you would choose a test if the topic was math whereas you would choose an assignment if it was related to coding.
     Do NOT generate any lesson whose type is not in {allowed}.
     Return JSON matching:
     {outline_parser.get_format_instructions()}
@@ -100,7 +101,7 @@ def course():
     course_ref  = db.collection('users').document(uid).collection('courses').document(timestamp)
     modules_ref = course_ref.collection('modules')
 
-    # compute total lessons (including one Unit Test per module)
+    # compute total lessons
     total_lessons = sum(len(mod.lessons) for mod in outline.modules)
 
     # save metadata and initialize progress tracking
@@ -141,15 +142,14 @@ def course():
                     "mod_title": mod.title,
                     "lesson_description": lesson.description
                 })
-            elif lesson.type == "test" or lesson.type == "unit test":
-                lesson_titles = [lesson.title for lesson in mod.lessons]
+            elif lesson.type == "test":
                 generate_test_content.apply_async(kwargs={
                     "uid": uid,
                     "course_id": timestamp,
                     "module_id": mod_id,
                     "lesson_id": lesson_id,
                     "topic": topic,
-                    "lesson_titles": lesson_titles if lesson.type == "unit test" else None,
+                    "lesson_titles": None,
                     "mod_title": mod.title,
                     "lesson_description": lesson.description
                 })

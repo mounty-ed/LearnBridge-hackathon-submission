@@ -11,9 +11,6 @@ def create_app():
     # Configuration
     app.config.from_object('back_end.config.Config')
 
-    # Ensure the upload folder exists
-    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-
     # Enable CORS
     CORS(app, origins=["http://localhost:3000"])
 

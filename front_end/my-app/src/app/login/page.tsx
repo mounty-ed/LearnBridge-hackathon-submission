@@ -130,6 +130,7 @@ export default function LogInPage() {
       <Paper
         elevation={1}
         sx={{
+          bgcolor: 'background.light',
           p: 6,
           width: '100%',
           maxWidth: 450,
@@ -238,7 +239,7 @@ export default function LogInPage() {
               color: theme.palette.text.primary,
               borderRadius: 999,
               height: 52,
-              backgroundColor: 'background.paper',
+              backgroundColor: 'background.light',
               border: `1px solid ${theme.palette.divider}`,
               '&:hover': {
                 backgroundColor: alpha(theme.palette.grey[300], 0.2),
@@ -268,7 +269,7 @@ export default function LogInPage() {
               color: theme.palette.text.primary,
               borderRadius: 999,
               height: 52,
-              backgroundColor: 'background.paper',
+              backgroundColor: 'background.light',
               border: `1px solid ${theme.palette.divider}`,
               '&:hover': {
                 backgroundColor: alpha(theme.palette.grey[300], 0.2),
@@ -298,7 +299,7 @@ export default function LogInPage() {
               color: theme.palette.text.primary,
               borderRadius: 999,
               height: 52,
-              backgroundColor: 'background.paper',
+              backgroundColor: 'background.light',
               border: `1px solid ${theme.palette.divider}`,
               '&:hover': {
                 backgroundColor: alpha(theme.palette.grey[300], 0.2),

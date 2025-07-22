@@ -30,14 +30,13 @@ def call_assignment_agent(agent, prompt):
 
 @celery.task(bind=True, name="generate_reading_content")
 def generate_assignment_content(self, uid: str, course_id: str, module_id: str, lesson_id: str, lesson_title: str, topic: str, mod_title: str, lesson_description: str):
-    print('generating assignment')
     llm = current_app.config['LESSON_READING_MODEL']
     prompt = f"""
     You are an expert instructor on {topic} and specifically {mod_title}.
     Write an in-depth, well-structured informative assignment for **{lesson_title}** based on this description:
     {lesson_description}
 
-    The purpose of the assignment is to provide the user with necessary practice.
+    **CLEARLY DEFINE THE TASK** the user has to perform for the user to gain necessary practice.
     Include markdown language for headings, subheadings, lists, and code if relevant.
     Include examples if relevant.
     Math equations are to be wrapped with '$$' for blocks and '$' for inline. Lines with '$$' are to have no other characters on the same line.
@@ -53,7 +52,12 @@ def generate_assignment_content(self, uid: str, course_id: str, module_id: str, 
                    .collection("courses").document(course_id)
 
     try:
-        resp = call_reading_agent(agent, prompt)
+        resp = agent.invoke({
+            "messages": [
+                {"role": "system", "content": "You are a detailed lesson writer."},
+                {"role": "user", "content": prompt}
+            ]
+        })
         content = resp["messages"][-1].content
 
         content_doc = lesson_ref.collection("content").document("body")
@@ -64,7 +68,6 @@ def generate_assignment_content(self, uid: str, course_id: str, module_id: str, 
 
         # update status and counters
         course_ref.set({"generatedLessons": Increment(1)}, merge=True)
-        print("Extracted assignment content:", content[:100])
         return {"status": "ok", "lesson_id": lesson_id}
     except Exception as e:
         db.collection('users').document(uid) \
@@ -79,43 +82,30 @@ def search_youtube_videos(
     query: str,
     api_key: str,
     max_results: int = 10,
-    order: str = "viewCount",
-    channel_ids: List[str] = None,
     video_duration: str = "medium",
 ) -> List[Dict]:
     youtube = build("youtube", "v3", developerKey=api_key)
     all_items = []
     seen_ids = set()
 
-    def _search_one(channel_id: str = None):
-        # 1) build params dict
-        params = {
-            "part": "snippet",
-            "q": query,
-            "type": "video",
-            "videoEmbeddable": "true",
-            "maxResults": max_results,
-            "order": order,
-            "videoDuration": video_duration,
-        }
-        # 2) optionally add channelId
-        if channel_id:
-            params["channelId"] = channel_id
+    # 1) build params dict
+    params = {
+        "part": "snippet",
+        "q": query,
+        "type": "video",
+        "videoEmbeddable": "true",
+        "maxResults": max_results,
+        "order": "viewCount",
+        "videoDuration": video_duration,
+    }
 
-        # 3) execute the search with those params
-        resp = youtube.search().list(**params).execute()
-        for item in resp.get("items", []):
-            vid = item["id"]["videoId"]
-            if vid not in seen_ids:
-                seen_ids.add(vid)
-                all_items.append(item)
-
-    # do one search per channel, or a single unfiltered search
-    if channel_ids:
-        for cid in channel_ids:
-            _search_one(channel_id=cid)
-    else:
-        _search_one()
+    # 2) execute the search with those params
+    resp = youtube.search().list(**params).execute()
+    for item in resp.get("items", []):
+        vid = item["id"]["videoId"]
+        if vid not in seen_ids:
+            seen_ids.add(vid)
+            all_items.append(item)
 
     return all_items
 
@@ -150,7 +140,7 @@ def score_video(snippet: Dict, stat: Dict) -> float:
     recency_score = max(0, 365*5 - age_days)  # 0–5 years, then clamps at 0
 
     view_score = stat["viewCount"] / 1000.0  # 1 point per 1,000 views
-    return recency_score * 0.8 + view_score * 1.2
+    return recency_score * 1 + view_score * 1.2
 
 @celery.task(bind=True, name="generate_video_content")
 def generate_video_content(
@@ -179,17 +169,10 @@ def generate_video_content(
 
     try:
         query = f"{mod_title} - {lesson_title}"
-        preferred_channels = [
-            # "UCEWpbFLzoYGPfuWUMFPSaoA", # organic chemistry tutor
-            # "UC4a-Gbdw7vOaccHmFo40b9g", # khan academy
-            # "UCX6b17PVsYBQ0ip5gyeme-Q", # crash course
-        ]
         videos = search_youtube_videos(
             query=query,
             api_key=YOUTUBE_API_KEY,
             max_results=10,
-            order="date",
-            channel_ids=preferred_channels,
             video_duration="medium"
         )
         if not videos:
@@ -235,6 +218,7 @@ def generate_video_content(
         # Optionally delete course if critical
         _delete_course(uid, course_id)
         raise
+
 
 
 class QuestionItem(BaseModel):
@@ -309,19 +293,9 @@ def generate_test_content(self, uid: str, course_id: str, module_id: str, lesson
         raise
 
 
-@backoff.on_exception(backoff.expo, (RateLimitError, OpenAIError), factor=20, max_tries=2)
-def call_reading_agent(agent, prompt):
-    resp = agent.invoke({
-        "messages": [
-            {"role": "system", "content": "You are a detailed lesson writer."},
-            {"role": "user", "content": prompt}
-        ]
-    })
-    return resp
 
 @celery.task(bind=True, name="generate_reading_content")
 def generate_reading_content(self, uid: str, course_id: str, module_id: str, lesson_id: str, lesson_title: str, topic: str, mod_title: str, lesson_description: str):
-    print('generating reading')
     MINIMUM_WORDS      = current_app.config['MIN_WORDS']
 
     llm = current_app.config['LESSON_READING_MODEL']
@@ -331,6 +305,8 @@ def generate_reading_content(self, uid: str, course_id: str, module_id: str, les
     Write an in-depth, well-structured informative textbook passage for **{lesson_title}** of at least {MINIMUM_WORDS} words based on this description:
     {lesson_description}
 
+    Call the tool to retrieve relevant context on the web.
+    DO NOT include any assignments or tasks in the content. Only information.
     Include markdown language for headings, subheadings, lists, and code if relevant.
     Include examples, word definitions, and long detailed explanations if relevant.
     Wrap math equations with '$$' for blocks and '$' for inline. Lines with '$$' are to have no other characters on the same line
@@ -370,7 +346,12 @@ def generate_reading_content(self, uid: str, course_id: str, module_id: str, les
                    .collection("courses").document(course_id)
 
     try:
-        resp = call_reading_agent(agent, prompt)
+        resp = agent.invoke({
+            "messages": [
+                {"role": "system", "content": "You are a detailed lesson writer."},
+                {"role": "user", "content": prompt}
+            ]
+        })
         content = resp["messages"][-1].content
 
         content_doc = lesson_ref.collection("content").document("body")
@@ -382,8 +363,6 @@ def generate_reading_content(self, uid: str, course_id: str, module_id: str, les
 
         # update status and counters
         course_ref.set({"generatedLessons": Increment(1)}, merge=True)
-        print("Extracted lesson content:", content[:100])
-        print("Citations:", citations[:3])
         return {"status": "ok", "lesson_id": lesson_id}
     except Exception as e:
         db.collection('users').document(uid) \

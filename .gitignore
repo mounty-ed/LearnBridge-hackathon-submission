@@ -1,4 +1,5 @@
 document_uploads
+debugging_file
 .venv
 __pycache__/
 firebase-service-account.json

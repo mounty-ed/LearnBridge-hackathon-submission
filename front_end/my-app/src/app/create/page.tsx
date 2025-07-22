@@ -41,6 +41,7 @@ export default function CourseCreatePage() {
   const [types, setTypes] = useState({
     videos: true,
     assignments: true,
+    tests: true,
   });
   const [title, setTitle] = useState('');
   const [topic, setTopic] = useState('');
@@ -276,12 +277,13 @@ export default function CourseCreatePage() {
                   <Divider sx={{ my: 3 }} />
 
                   {/* Question Types */}
-                  {['videos', 'assignments'].map((type) => (
+                  {['videos', 'assignments', 'tests'].map((type) => (
                     <Box key={type} sx={{ display: 'flex', alignItems: 'center', mb: 1, justifyContent: 'space-between' }}>
                       <Typography sx={{ color: 'text.secondary' }}>
                         {{
-                          videos: 'Videos',
+                          tests: 'Tests',
                           assignments: 'Assignments',
+                          videos: 'Videos',
                         }[type]}
                       </Typography>
                       <Switch

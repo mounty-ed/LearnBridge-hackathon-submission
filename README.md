@@ -1,26 +1,51 @@
-## Course Creation Website
+## Course Creation Website – *Learnbridge*
 
-An autonomous web application that generates courses, modules, and lessons based on user prompts, documents, or links. Leveraging a Flask backend with AI-driven content creation and a Next.js frontend, this project aims to streamline the course creation process.
+**Learnbridge** is an autonomous, AI-powered web application built to provide *free and meaningful education to all*. Designed with social good in mind, it allows users to generate high-quality, structured courses with minimal effort. Powered by a Flask backend and a Next.js frontend, Learnbridge bridges the gap between learners and accessible education through intelligent automation.
 
 ---
+
 
 ### Table of Contents
 
-1. [Features](#features)
-2. [Tech Stack](#tech-stack)
-3. [Prerequisites](#prerequisites)
-4. [Installation](#installation)
-5. [Configuration](#configuration)
-6. [Running the Application](#running-the-application)
+1. [Purpose](#purpose)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Prerequisites](#prerequisites)
+5. [Installation](#installation)
+6. [Configuration](#configuration)
+7. [Running the Application](#running-the-application)
 
 ---
 
-## Features
+### 🌍 Purpose
 
-* **AI-Powered Content Generation:** Create courses, modules, and lessons using customizable AI models.
-* **Multiple Lesson Types:** Support for readings, assignments, tests, and Youtube videos.
-* **Structured Output:** Generates content in Markdown, organized by modules and lessons.
-* **User Authentication:** Firebase Authentication for secure user access.
+Learnbridge was created with the mission of democratizing education. By automating the course creation process using advanced AI agenttic workflows, Learnbridge makes it easier for anyone—from educators to independent learners—to generate comprehensive learning experiences without cost or technical knowledge.
+
+## 🚀 Features
+
+* **AI-Powered Course Generation**
+  Create entire course structures based on a topic and syllabus, automatically generating modules and detailed lessons.
+
+* **Sequential Multi-Step Agent Pipeline**
+  A custom orchestration agent decomposes tasks and coordinates lesson creation through a structured, modular flow.
+
+* **Reliable, Scalable Lesson Creation**
+  Each lesson is processed asynchronously using Celery background tasks—improving speed and avoiding memory/time limits during generation.
+
+* **Contextual Chatbot Assistant**
+  Learners can interact with a personal assistant that uses short-term memory and current lesson content to provide relevant, real-time support.
+
+* **Agentic Web Tooling with Citations**
+  Integrated web search and retrieval agents enhance lessons with verified sources, including cited information and relevant YouTube videos via a custom scoring system.
+
+* **Multiple Lesson Types**
+  Supports diverse lesson content such as readings, quizzes, assignments, and enriched video resources.
+
+* **Structured Markdown Output**
+  All generated content is cleanly formatted in Markdown, making it easy to render, export, or modify.
+
+* **User Authentication**
+  Firebase Authentication ensures secure, personalized access for learners and creators.
 
 ## Tech Stack
 
@@ -103,7 +128,7 @@ An autonomous web application that generates courses, modules, and lessons based
 
    ```bash
    cd back_end
-   source venv/bin/activate
+   source .venv/bin/activate
    cd ..
    python -m back_end.app
    ```
@@ -112,7 +137,7 @@ An autonomous web application that generates courses, modules, and lessons based
 
    ```bash
    cd back_end
-   source venv/bin/activate
+   source .venv/bin/activate
    cd ..
    celery -A back_end.tasks.worker worker --loglevel=info
    ```

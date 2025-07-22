@@ -42,11 +42,11 @@ export default function AssignmentPage({ assignmentJson, handleComplete }: Readi
     li: ({ node, ...props }) => <ListItem sx={{ display: 'list-item', py: 0 }} {...props} />,
     code: ({ node, inline, className, children, ...props }) =>
       inline ? (
-        <Box component="code" sx={{ bgcolor: 'background.paper', p: 0.5, borderRadius: 1, my: 1 }} {...props}>
+        <Box component="code" sx={{ bgcolor: 'background.light', p: 0.5, borderRadius: 1, my: 1 }} {...props}>
           {children}
         </Box>
       ) : (
-        <Typography component="pre" variant="body2" sx={{ bgcolor: 'background.paper', color: 'text.primary', p: 2, borderRadius: 1, my: 1 }}>
+        <Typography component="pre" variant="body2" sx={{ bgcolor: 'background.light', color: 'text.primary', p: 2, borderRadius: 1, my: 1 }}>
           {children}
         </Typography>
       ),

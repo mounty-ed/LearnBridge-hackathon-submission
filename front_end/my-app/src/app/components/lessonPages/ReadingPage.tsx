@@ -58,11 +58,11 @@ export default function ReadingPage({ readingJson, handleComplete }: ReadingPage
     ),
     code: ({ node, inline, className, children, ...props }) =>
       inline ? (
-        <Box component="code" sx={{ bgcolor: 'background.paper', p: 0.5, borderRadius: 1, my: 1 }} {...props}>
+        <Box component="code" sx={{ bgcolor: 'background.light', p: 0.5, borderRadius: 1, my: 1 }} {...props}>
           {children}
         </Box>
       ) : (
-        <Typography component="pre" variant="body2" sx={{ bgcolor: 'background.paper', color: 'text.primary', p: 2, borderRadius: 1, my: 1 }}>
+        <Typography component="pre" variant="body2" sx={{ bgcolor: 'background.light', color: 'text.primary', p: 2, borderRadius: 1, my: 1 }}>
           {children}
         </Typography>
       ),
@@ -102,7 +102,7 @@ export default function ReadingPage({ readingJson, handleComplete }: ReadingPage
           Complete <CheckCircleOutlineOutlinedIcon sx={{ml: 1}}/>
         </Button>
       </Box>
-      {/* {(readingJson.citations.length > 0 && readingJson.citations) && (
+      {(readingJson.citations.length > 0 && readingJson.citations) && (
         <Box sx={{ marginTop: 12 }}>
           <Typography variant="h6" gutterBottom color="text.secondary">Sources:</Typography>
           {readingJson.citations.map((item, idx) => (
@@ -114,7 +114,7 @@ export default function ReadingPage({ readingJson, handleComplete }: ReadingPage
             </Typography>
           ))}
         </Box>
-      )} */}
+      )}
     </Container>
   );
 }

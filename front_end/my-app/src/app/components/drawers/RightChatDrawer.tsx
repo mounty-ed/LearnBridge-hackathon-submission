@@ -42,11 +42,11 @@ const markdownComponents = {
   ),
   code: ({ node, inline, className, children, ...props }) =>
     inline ? (
-      <Box component="code" sx={{ bgcolor: 'grey.200', p: 0.5, borderRadius: 1 }} {...props}>
+      <Box component="code" sx={{ bgcolor: 'background.light', p: 0.5, borderRadius: 1 }} {...props}>
         {children}
       </Box>
     ) : (
-      <Typography component="pre" variant="body2" sx={{ bgcolor: 'grey.900', color: 'grey.100', p: 2, borderRadius: 1 }}>
+      <Typography component="pre" variant="body2" sx={{ bgcolor: 'background.light', color: 'grey.100', p: 2, borderRadius: 1 }}>
         {children}
       </Typography>
     ),

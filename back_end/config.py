@@ -6,9 +6,6 @@ from langchain_openai import ChatOpenAI
 
 class Config:
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, '..', 'storage', 'document_uploads')
-    MAX_CONTENT_LENGTH = 64 * 1024 * 1024  # 64 MB
-    ALLOWED_EXTENSIONS = {'pdf', 'docx', 'txt'}
     OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
     EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
     MODEL = os.getenv("BASE_MODEL")
@@ -32,10 +29,10 @@ class Config:
     TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
     REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
     YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-    NUM_QUESTIONS = 3
-    MIN_WORDS = 200
+    NUM_QUESTIONS = 5
+    MIN_WORDS = 600
     MIN_LESSONS = 3
-    MAX_LESSONS = 6
+    MAX_LESSONS = 8
 
 
 
